@@ -10,18 +10,21 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of userData | paginate: { itemsPerPage: 5, currentPage: p } ">
+      <tr *ngFor="let item of userData | paginate: { itemsPerPage: 3, currentPage: p } ">
         <td>{{ item.username }}</td>
         <td>{{ item.password }}</td>
         <td> 
             <button type="button" class="btn btn-link" [routerLink]="['Edit', item._id]">Edit</button>
             <button type="button" class="btn btn-link" style="color: red" (click)="deleteFuntion(item._id)">Delete</button> 
+            <button type="button" class="btn btn-link" (click)="viewUserDetails(item)">View</button>
         </td>
       </tr>      
     </tbody>
 </table>
-
 <div class="pagination" *ngIf="dataListCheck">
     <pagination-controls (pageChange) = "p = $event"></pagination-controls>
 </div>
 {{errorMessage}}
+
+
+

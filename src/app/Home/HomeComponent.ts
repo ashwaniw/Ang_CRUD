@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { appService } from '../Services/appService';
 import { Router } from '@angular/router';
@@ -9,10 +9,15 @@ import { ThrowStmt } from '@angular/compiler';
     templateUrl: 'HomeComponent.html'
 })
 
-export class HomeComponent{
+export class HomeComponent implements OnInit{
+
+    @Output() eventClicked = new EventEmitter<Event>();
+
     userData: any = [];
     dataListCheck = false;
     errorMessage : any;
+    userDetails: any ;
+    userDetailsArray : any;
     constructor( 
         private http: HttpClient,
         private api : appService,
@@ -30,7 +35,6 @@ export class HomeComponent{
         },err=>{
             console.log(err);
             this.errorMessage = 'Data is not available !!!'
-
         })
     }
 
@@ -50,7 +54,10 @@ export class HomeComponent{
         }
     }
 
-    goToEdit(item){        
-        this.route.navigate(['/'],{});
+    viewUserDetails(userDetails): void{        
+        this.eventClicked.emit(userDetails);
+        this.route.navigate(['/Home/UserDetals']);
+        this.userDetailsArray = userDetails;
+        console.log(this.userDetailsArray);
     }
 }
