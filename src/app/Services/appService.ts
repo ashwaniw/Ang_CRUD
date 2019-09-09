@@ -33,6 +33,10 @@ export class appService {
     getData(){
         return this.http.get('http://localhost:5300/fetchdata');
     }
+    
+    securedData(){        
+        return this.http.get('http://localhost:5300/secured');
+    }
 
     loggedIn(){
         return !!localStorage.getItem('user');
@@ -50,8 +54,7 @@ export class appService {
         return this.http.get('http://localhost:5300/edit/'+ id);
     }
 
-    updateUser(data){
-        console.log(data);
+    updateUser(data){        
         return this.http.put('http://localhost:5300/updateUser/'+ data._id, data);
 
     }

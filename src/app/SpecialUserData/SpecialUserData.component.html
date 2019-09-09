@@ -1,0 +1,26 @@
+<h2>Special User Data</h2>
+<table class="table table-bordered" *ngIf="dataListCheck">
+        <thead>
+          <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Password</th>
+            <th scope="col">Date</th>
+            <th scope="col"><button type="button" class="btn btn-link">Action</button></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of userData | paginate: { itemsPerPage: 3, currentPage: p }">
+            <td>{{ item.username }}</td>
+            <td>{{ item.password }}</td>
+            <td>{{ item.regdate  | date:'fullDate' }}</td>
+            <td> 
+                <button type="button" class="btn btn-link" [routerLink]="['Edit', item._id]">Edit</button>
+                <button type="button" class="btn btn-link" style="color: red" (click)="deleteFuntion(item._id)">Delete</button> 
+                <button type="button" class="btn btn-link" (click)="singleUser(item)">View</button>
+            </td>
+          </tr>      
+        </tbody>
+    </table>
+    <div class="pagination" *ngIf="dataListCheck">
+        <pagination-controls (pageChange) = "p = $event"></pagination-controls>
+    </div>

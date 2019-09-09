@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { HomeComponent } from '../Home/HomeComponent';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
     selector: 'user-details',
@@ -7,14 +7,15 @@ import { HomeComponent } from '../Home/HomeComponent';
 })
 
 export class UserDetails implements OnInit {
+    item = {};
 
-    @Input()  item : Event;
-
-    constructor(){
-
+constructor(private route : ActivatedRoute){
+        this.route.queryParams.subscribe( params =>{            
+            this.item = params
+        })
     }
 
-    ngOnInit(){
-
+    ngOnInit(){ 
+    
     }
 }

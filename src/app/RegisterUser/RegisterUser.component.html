@@ -1,19 +1,108 @@
 <form [formGroup]="regForm" (ngSubmit)="regUser(regForm.value)">
-    <div [ngClass]="regError ? 'alert alert-danger' : ''">
+    <!--<div [ngClass]="regError ? 'alert alert-danger' : ''">
         {{regError}}
-    </div>
+    </div>-->
     <div [ngClass]="message ? 'alert alert-success' : ''">
         {{message}}
     </div>
-    <div class="form-group">
-        <label>Username</label>
-        <input type="text" class="form-control" [formControl]="regForm.controls['username']">
+    <h5>Personal Details</h5>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Username" value="" [formControl]="regForm.controls['username']">
+            </mat-form-field>
+            
+        </div>
+        <div class="form-group col-md-6">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Password" value="" [formControl]="regForm.controls['password']">
+            </mat-form-field>
+        </div>
     </div>
-    <div class="form-group">
-        <label>Password</label>
-        <input type="text" class="form-control" [formControl]="regForm.controls['password']">
+    <div class="form-row">
+        <div class="form-group  col-md-6">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Email" value="" [formControl]="regForm.controls['email']">                
+            </mat-form-field>
+
+        </div>
+        <div class="form-group  col-md-6">
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker" [max]=dateVa placeholder="Birthday"
+                    [formControl]="regForm.controls['dob']">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <mat-form-field>
+                <mat-label>Department List</mat-label>
+                <mat-select [formControl]="regForm.controls['dept']">
+                    <mat-option *ngFor="let dept of deptData" [value]="dept">
+                        {{dept}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Mobile No." value="" [formControl]="regForm.controls['mobNo']">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <legend class="col-form-label col-md-6 pt-0 pl-0">Gender</legend>
+            <mat-radio-group aria-label="Select an option" placeholder="Select an option"
+                [formControl]="regForm.controls['gender']">
+                <mat-radio-button value="Male">Male</mat-radio-button>
+                <mat-radio-button value="Female">Female</mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div class="form-group col-md-6">
+            <legend class="col-form-label col-md-6 pt-0 pl-0">Marital Status</legend>
+            <mat-radio-group aria-label="Select an option" [formControl]="regForm.controls['maritalStatus']">
+                <mat-radio-button value="Married">Married</mat-radio-button>
+                <mat-radio-button value="Unmarried">Unmarried</mat-radio-button>
+            </mat-radio-group>
+        </div>
+    </div>
+    <h5>Address Details</h5>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="City" value="" [formControl]="regForm.controls['city']">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-4">
+            <mat-form-field>
+                <mat-label>State</mat-label>
+                <mat-select [formControl]="regForm.controls['state']">
+                    <mat-option *ngFor="let state of stateData" [value]="state.value">
+                        {{state.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-2">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Zip" value="" [formControl]="regForm.controls['zip']">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+
+        </div>
+        <div class="col-md-6">
+
+        </div>
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
 </form>
 
 <ul>
@@ -21,3 +110,6 @@
         {{item}}
     </li>
 </ul>
+<p>
+    {{formData | json}}
+</p>

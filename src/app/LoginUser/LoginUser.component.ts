@@ -34,8 +34,7 @@ export class LoginComponent {
         }else{
             localStorage.setItem('user',userName);
             this.rout.navigate(['/Home']);
-        }
-        
+        }        
         },err=>{
             console.log(err);
         })

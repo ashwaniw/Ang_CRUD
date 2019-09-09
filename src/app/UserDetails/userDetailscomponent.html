@@ -1,4 +1,9 @@
-<div *ngIf="item">
-    {{item.username}}<br>
-    {{item.password}}
+<div class="row" *ngIf="item">
+    <div class="col-md-6">
+          Username:   {{item.username}}
+    </div>
+    <div class="col-md-6">
+          Password:  {{item.password}}
+    </div>
 </div>
+

@@ -1,4 +1,4 @@
-import { Component  }from '@angular/core';
+import { Component, OnInit  }from '@angular/core';
 import { appService } from '../app/Services/appService';
 
 @Component({
@@ -6,12 +6,22 @@ import { appService } from '../app/Services/appService';
     templateUrl: './app.component.html'
 })
 
-export class AppCoponent {
+export class AppCoponent implements OnInit {
+    checkUser = false;
     constructor (private api: appService){
+        
     }
     title =  'Auth Guard';
+    loginName: any;
 
-    logOut(){
-        localStorage.removeItem('user');
+    ngOnInit(){                  
     }
+
+    ngDoCheck(){
+        var loginName = localStorage.getItem('user');    
+        this.loginName = loginName; 
+    }
+    logOut(){
+        localStorage.removeItem('user');        
+    }   
 }

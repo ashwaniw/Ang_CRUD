@@ -1,8 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { appService } from '../Services/appService';
 import { Router } from '@angular/router';
-import { ThrowStmt } from '@angular/compiler';
 
 @Component({
     selector: 'home',
@@ -10,8 +9,6 @@ import { ThrowStmt } from '@angular/compiler';
 })
 
 export class HomeComponent implements OnInit{
-
-    @Output() eventClicked = new EventEmitter<Event>();
 
     userData: any = [];
     dataListCheck = false;
@@ -25,9 +22,11 @@ export class HomeComponent implements OnInit{
         ){
         
     }
+    
     ngOnInit(){
         this.getUserData();
     }
+    
     getUserData(){
         this.api.getData().subscribe(res=>{
             this.userData = res;
@@ -53,11 +52,18 @@ export class HomeComponent implements OnInit{
             this.deleteUser(id);
         }
     }
+    
+    viewUserDetails(userDetails){
+       // console.log(userDetails);
+        let navigateExtra = {
+            queryParams : {
+                _id:userDetails._id,
+                username:userDetails.username,
+                password:userDetails.password
+            }
+        }
+        this.route.navigate(['/Home/UserDetals'],navigateExtra);
 
-    viewUserDetails(userDetails): void{        
-        this.eventClicked.emit(userDetails);
-        this.route.navigate(['/Home/UserDetals']);
-        this.userDetailsArray = userDetails;
-        console.log(this.userDetailsArray);
     }
+
 }
