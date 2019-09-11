@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <form [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)">
     <div class="form-group">
         <label>Username</label>
@@ -10,4 +11,18 @@
     <div class="text-center">
         <button type="submit" class="btn btn-primary">Login</button>
     </div>
+=======
+<form [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)">
+    <div class="form-group">
+        <label>Username</label>
+        <input type="text" class="form-control" placeholder="Username" [formControl]="loginForm.controls['username']">
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        <input type="text" class="form-control" placeholder="Password" [formControl]="loginForm.controls['password']">
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Login</button>
+    </div>
+>>>>>>> 50b3ecfd7687afa46ff057a2f6e596ac772d004f
 </form>
